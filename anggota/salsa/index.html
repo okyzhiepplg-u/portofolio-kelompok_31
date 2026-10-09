@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salsa — Interactive Botanical Showcase</title>
+
+    <!-- Google Fonts: Playfair Display (Serif Elegan) & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. PALET WARNA BOTANICAL / FLORAL ELEGAN
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-main: #faf6f0;           /* Soft Floral Cream */
+            --bg-card: #ffffff;
+            --primary-rose: #d88a8a;      /* Rose Gold / Dust Rose */
+            --primary-dark: #8c4a4a;      /* Deep Rose Maroon */
+            --accent-green: #6b8e73;      /* Sage / Leaf Green */
+            --accent-soft: #f2e3e1;       /* Petal Pink Transparan */
+            
+            --text-main: #362a2a;        /* Deep Warm Brown */
+            --text-muted: #7d6e6e;
+            --border: #ebdcd5;
+
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================================================
+           2. HEADER NAVIGASI BOTANICAL
+           ========================================================================== */
+        .nav-wrapper {
+            padding: 24px 0;
+            border-bottom: 1px dashed var(--primary-rose);
+            margin-bottom: 30px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-rose);
+        }
+
+        /* ==========================================================================
+           3. HERO FLORAL HEADER
+           ========================================================================== */
+        .hero-section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 30px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(216, 138, 138, 0.08);
+            overflow: hidden;
+        }
+
+        .badge-status {
+            display: inline-block;
+            background-color: var(--accent-soft);
+            color: var(--primary-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            line-height: 1.2;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 i {
+            font-weight: 400;
+            color: var(--accent-green);
+        }
+
+        .hero-text p {
+            color: var(--text-muted);
+            font-size: 15px;
+            max-width: 480px;
+            margin-bottom: 24px;
+        }
+
+        .avatar-frame {
+            position: relative;
+            justify-self: center;
+        }
+
+        .photo-border {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            padding: 8px;
+            border: 2px dashed var(--primary-rose);
+            background-color: var(--bg-main);
+        }
+
+        .photo-border img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* ==========================================================================
+           4. KEAHLIAN — PETAL CARDS
+           ========================================================================== */
+        .section-header {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            color: var(--primary-dark);
+            margin: 50px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--border);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 26px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary-rose);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(216, 138, 138, 0.12);
+        }
+
+        .skill-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .skill-card h3 {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           5. PROYEK GALERI
+           ========================================================================== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 180px;
+            background-color: var(--accent-soft);
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 22px;
+        }
+
+        .project-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .project-info h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .project-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           6. FOOTER BOTANICAL
+           ========================================================================== */
+        .footer-card {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-card h2 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .footer-card p {
+            color: var(--accent-soft);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .contact-pills {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .pill-item {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background-color 0.2s;
+        }
+
+        .pill-item:hover {
+            background-color: var(--primary-rose);
+        }
+
+        /* RESPONSIVE TABLET & DESKTOP */
+        @media (min-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr 220px;
+            }
+
+            .avatar-frame {
+                order: 2;
+            }
+
+            .hero-text {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigasi -->
+    <div class="nav-wrapper">
+        <div class="container nav-content">
+            <a href="#" class="brand-logo">
+                🌸 Salsa Febia Wahyuningtyas
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Keahlian</a></li>
+                <li><a href="#works">Karya</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section id="about" class="hero-section">
+            <div class="avatar-frame">
+                <div class="photo-border">
+                    <!-- Ganti src dengan foto kamu -->
+                    <img src="img/35. SALSA FEBIA WAHYUNINGTYAS.jpg" alt="Salsa" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'><circle cx=\'100\' cy=\'100\' r=\'100\' fill=\'%23f2e3e1\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%238c4a4a\' font-family=\'serif\' font-size=\'16\'>Foto Salsa</text></svg>';">
+                </div>
+            </div>
+
+            <div class="hero-text">
+                <span class="badge-status">🌷 SMK Brantas Karangkates • RPL</span>
+                <h1>Merancang Web dengan <i>Sentuhan Estetis.</i></h1>
+                <p>Halo, saya Salsa. Saya senang membangun antarmuka web yang rapi, fungsional, dan memiliki keseimbangan visual yang lembut serta nyaman dipandang.</p>
+            </div>
+        </section>
+
+        <!-- Keahlian Utama -->
+        <h2 id="skills" class="section-header">Keahlian Utama</h2>
+        <section class="skills-grid">
+            <!-- HTML -->
+            <div class="skill-card">
+                <span class="skill-icon">🌿</span>
+                <h3>HTML5</h3>
+                <p>Menyusun fondasi dan struktur halaman web yang terstruktur dengan standar semantik modern.</p>
+            </div>
+
+            <!-- CSS -->
+            <div class="skill-card">
+                <span class="skill-icon">🌺</span>
+                <h3>CSS3 Styling</h3>
+                <p>Mengatur tata letak responsif menggunakan Flexbox/Grid serta memberikan gaya visual yang menarik.</p>
+            </div>
+
+            <!-- Python -->
+            <div class="skill-card">
+                <span class="skill-icon">🐍</span>
+                <h3>Python Programming</h3>
+                <p>Mengembangkan logika program, pemrosesan data, serta pembuatan skrip otomasi yang efisien.</p>
+            </div>
+        </section>
+
+        <!-- Galeri Karya -->
+        <h2 id="works" class="section-header">Galeri Karya</h2>
+        <section class="projects-grid">
+            <!-- Proyek 1: Game Snake -->
+            <article class="project-card">
+                <div class="project-img">
+                    <img src="img/project1.jpeg" alt="Game Snake">
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">GAME DEVELOPMENT</div>
+                    <h3>Snake Game Interactive</h3>
+                    <p>Game ular klasik berbasis web dengan fitur perhitungan skor, item buah, serta kontrol kecepatan permainan yang responsif.</p>
+                </div>
+            </article>
+
+            <!-- Proyek 2: Generator Sertifikat -->
+            <article class="project-card">
+                <div class="project-img">
+                    <img src="img/project2.jpeg" alt="Generator Sertifikat">
+                </div>
+                <div class="project-info">
+                    <div class="project-tag">WEB APPLICATION</div>
+                    <h3>Certificate Generator</h3>
+                    <p>Aplikasi pembuat sertifikat otomatis berbasis formulir dengan opsi kustomisasi teks, tanggal, serta watermark secara instan.</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="footer-card">
+            <h2>Mari Terhubung 💐</h2>
+            <p>Terbuka untuk kolaborasi atau diskusi seputar pemrograman web.</p>
+            <div class="contact-pills">
+                <a href="mailto:salsa@email.com" class="pill-item">✉️ salsapplg70@email.com</a>
+                <a href="https://instagram.com/salsa_aja" target="_blank" class="pill-item">📷 @salsa_febb_</a>
+                <span class="pill-item">📍 Karangkates, Malang</span>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>
